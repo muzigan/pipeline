@@ -86,4 +86,4 @@ spec:
   # checkout the private repositories
   - name: basic-auth
     secret:
-      secretName: pac-gitauth
+      secretName: "{{ git_auth_secret }}"
