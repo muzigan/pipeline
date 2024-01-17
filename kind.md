@@ -11,14 +11,14 @@ oc edit deploy gosmee (add env HTTPS_PORXY)
       - env:
         - name: HTTPS_PROXY
           value: http://185.46.212.34:10015
-        - name: NO_PROXY
-          value: pipelines-as-code.svc.cluster.local;*.svc.cluster.local;*.cluster.local;cloud.devops.philips-healthsuitechina.com.cn;novalocal
+ oc -n pipelines-as-code edit deploy  pipelines-as-code-controller
       dnsConfig:
         nameservers:
         - 130.147.249.32
         - 130.147.236.5
         - 161.92.35.78
 
+edit deployment/pipelines-as-code-controller K_SINK_TIMEOUT=300 
 
 
 kubectl -n pipelines-as-code logs -f gosmee-7dd68dcff6-7ct5b & 
