@@ -7,3 +7,21 @@ curl https://api.github.com/repos/openshift-pipelines/pipelines-as-code/releases
 oc get pods -A 
 tkn-pac bootstrap
 oc edit deploy gosmee (add env HTTPS_PORXY)
+
+      - env:
+        - name: HTTPS_PROXY
+          value: http://185.46.212.34:10015
+        - name: NO_PROXY
+          value: pipelines-as-code.svc.cluster.local;*.svc.cluster.local;*.cluster.local;cloud.devops.philips-healthsuitechina.com.cn;novalocal
+      dnsConfig:
+        nameservers:
+        - 130.147.249.32
+        - 130.147.236.5
+        - 161.92.35.78
+
+
+
+kubectl -n pipelines-as-code logs -f gosmee-7dd68dcff6-7ct5b & 
+kubectl -n pipelines-as-code logs -f  pipelines-as-code-controller-555b64dccf-j5s7t &
+kubectl -n pipelines-as-code logs -f pipelines-as-code-watcher-86d9c59dbb-fw77g &
+kubectl -n pipelines-as-code logs -f pipelines-as-code-webhook-7b676c75d6-l5fsh & 
