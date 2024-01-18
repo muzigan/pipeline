@@ -18,11 +18,11 @@ oc -n pipelines-as-code edit deploy gosmee (add env HTTPS_PORXY)
         - name: HTTPS_PROXY
           value: http://185.46.212.34:10015
 
-edit deployment/pipelines-as-code-controller K_SINK_TIMEOUT=300 
+oc -n pipelines-as-code edit deployment/pipelines-as-code-controller K_SINK_TIMEOUT=300 
 oc -n pipelines-as-code edit deploy gosmee
 
 
 kubectl -n pipelines-as-code logs -f  gosmee-7dd68dcff6-xhd45 & 
-kubectl -n pipelines-as-code logs -f pipelines-as-code-controller-59b759b87c-8rt9k &
+kubectl -n pipelines-as-code logs -f  pipelines-as-code-controller-f7f4c8bd6-hkd2d &
 kubectl -n pipelines-as-code logs -f pipelines-as-code-watcher-86d9c59dbb-x9cv4 &
 kubectl -n pipelines-as-code logs -f pipelines-as-code-webhook-7b676c75d6-2vl7f & 
