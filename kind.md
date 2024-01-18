@@ -22,6 +22,6 @@ edit deployment/pipelines-as-code-controller K_SINK_TIMEOUT=300
 
 
 kubectl -n pipelines-as-code logs -f gosmee-7dd68dcff6-7ct5b & 
-kubectl -n pipelines-as-code logs -f  pipelines-as-code-controller-555b64dccf-j5s7t &
+kubectl -n pipelines-as-code logs -f   pipelines-as-code-controller-59b759b87c-rt6p4 &
 kubectl -n pipelines-as-code logs -f pipelines-as-code-watcher-86d9c59dbb-fw77g &
 kubectl -n pipelines-as-code logs -f pipelines-as-code-webhook-7b676c75d6-l5fsh & 
