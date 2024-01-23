@@ -1,0 +1,68 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: echo-inputs
+  labels:
+    app.kubernetes.io/version: "1.0.0"
+  annotations:
+    tekton.dev/pipelines.minVersion: "0.17.0"
+    tekton.dev/categories: Devops
+    tekton.dev/tags: cicd
+    tekton.dev/displayName: "echo inputs"
+    tekton.dev/platforms: "linux/amd64"
+spec:
+  description: >-
+    This Task echos any inputs and pass them to results.
+  params:
+    - name: inputs
+      type: array
+      default: 
+        - status=0
+    - name: image
+      type: string
+      default: pww.artifactory.cdi.philips.com/devops/devops-toolbox:base
+    - name: verbose
+      type: string
+      default: "false"
+    - name: active
+      type: string
+      default: "true"
+  workspaces:
+    - name: input
+      optional: true
+    - name: cache
+      optional: true
+    - name: credential
+      optional: true
+  results:
+    - name: status
+    - name: rs-1
+    - name: rs-2
+    - name: rs-3
+    - name: rs-4
+    - name: rs-5
+  steps:
+    - name: echo-inputs
+      args: 
+        - "$(params.inputs[*])"
+      script: |
+        #!/usr/bin/env bash 
+        set -e
+
+        echo -n "0"  | tee $(results.status.path)
+        echo -n rs-1 | tee $(results.rs-1.path)
+        echo -n rs-2 | tee $(results.rs-2.path)
+        echo -n rs-3 | tee $(results.rs-3.path)
+        echo -n rs-4 | tee $(results.rs-4.path)
+        echo -n rs-5 | tee $(results.rs-5.path)
+
+
+      image: pww.artifactory.cdi.philips.com/devops/devops-toolbox:base
+      resources:
+        requests:
+          memory: 200Mi
+          cpu: 200m
+        limits:
+          memory: 300Mi
+          cpu: 300m
+      imagePullPolicy: Always
