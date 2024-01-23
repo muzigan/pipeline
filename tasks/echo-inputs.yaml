@@ -20,7 +20,7 @@ spec:
         - status=0
     - name: image
       type: string
-      default: pww.artifactory.cdi.philips.com/devops/devops-toolbox:base
+      default: registry.access.redhat.com/ubi9/ubi-micro
     - name: verbose
       type: string
       default: "false"
@@ -57,7 +57,7 @@ spec:
         echo -n rs-5 | tee $(results.rs-5.path)
 
 
-      image: pww.artifactory.cdi.philips.com/devops/devops-toolbox:base
+      image: $(params.image)
       resources:
         requests:
           memory: 200Mi
